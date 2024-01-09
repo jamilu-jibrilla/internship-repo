@@ -1,0 +1,35 @@
+html
+  head
+    title Export CSV
+    script.
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('upload-form').addEventListener('click', function(e) {
+            const inputFile = document.createElement("input");
+            inputFile.type = "file";
+            inputFile.accept = ".csv"
+            inputFile.click();
+            inputFile.addEventListener("change", async (e) => {
+            const formData = new FormData();
+            formData.append('file', e.target.files[0]);
+             fetch('/api/v1/import', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+            });
+        }); 
+
+        document.getElementById('upload-form2').addEventListener('click', function(e) {
+            fetch('/api/v1/export', {
+                method: 'GET',
+            }).catch(error => console.error('Error:', error));
+        }); 
+      });
+  body
+    h1 This page is used to test the export and import endpoint
+    button#upload-form Upload
+    h1
+    button#upload-form2 Export
+

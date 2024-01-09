@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    title Products
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", rel="stylesheet")
+  body
+    .container
+      .row
+        each product in products
+          .col-md-4
+            .card.mb-4.shadow-sm
+              img.bd-placeholder-img.card-img-top(width="100%", height="225", src=product.image)
+              .card-body
+                h5.card-title= product.title
+                p.card-text= product.description
+                .d-flex.justify-content-between.align-items-center
+                  .btn-group
+                    a.btn.btn-sm.btn-outline-secondary(href=`/${product.id}`, role="button") View
+                    button.btn.btn-sm.btn-outline-secondary(type="button") Buy
+                  small.text-muted $#{product.price}
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js")

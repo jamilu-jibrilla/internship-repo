@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+  head
+    title Thank You
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", rel="stylesheet")
+  body
+    .container
+      .row
+        .col-md-12
+          h1 Thank You for Your Purchase
+          table.table.table-bordered
+            thead
+              tr
+                th Product Title
+                th Price
+            tbody
+              tr
+                //- td #{order.Product.title}
+                td $#{order.total}
+          p Payment Method: Stripe
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js")
