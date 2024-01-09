@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
   });
 
 
-// Get one shipping dock by id
 router.get('/:id', async (req, res) => {
     const ord = await variables.findByPk(req.params.id);
     if (ord) {
@@ -28,10 +27,8 @@ router.get('/:id', async (req, res) => {
     }
   });
   
-  // Add a new shipping dock
   router.post('/', async (req, res) => {
 
-    // Check if request body is empty
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "Request body cannot be empty" });
     }
@@ -40,15 +37,10 @@ router.get('/:id', async (req, res) => {
       const ord = await variables.create(req.body);
       res.status(201).json(ord);
     } catch (error) {
-      // Handle Sequelize validation error
         return res.status(400).json({ error: "Validation Error: " + error.message });
-      
-      // Handle other errors
-      return res.status(500).json({ error: "An error occurred while creating the shipping dock." });
     }
   });
 
-   // Update a shipping dock
     router.put('/:id', async (req, res) => {
         const ord = await variables.findByPk(req.params.id);
         if (ord) {

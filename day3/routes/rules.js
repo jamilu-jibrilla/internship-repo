@@ -28,8 +28,6 @@ router.get('/:id', async (req, res) => {
 
 
   router.post('/', async (req, res) => {
-
-    // Check if request body is empty
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "Request body cannot be empty" });
     }
@@ -38,11 +36,7 @@ router.get('/:id', async (req, res) => {
       const ord = await rules.create(req.body);
       res.status(201).json(ord);
     } catch (error) {
-      // Handle Sequelize validation error
         return res.status(400).json({ error: "Validation Error: " + error.message });
-      
-      // Handle other errors
-      return res.status(500).json({ error: "An error occurred while creating the shipping dock." });
     }
   });
 
@@ -61,7 +55,7 @@ router.get('/:id', async (req, res) => {
     const ord = await rules.findByPk(req.params.id);
     if (ord) {
       await ord.destroy();
-      res.status(204).send();
+      res.status(204).send("deleted");
     } else {
       res.status(404).send('rules not found');
     }

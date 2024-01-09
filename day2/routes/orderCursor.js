@@ -12,7 +12,6 @@ router.get('/sale', async (req, res) => {
 
   // Check if 'month' and 'year' are provided
   if (month && year) {
-    // return res.status(400).json({ error: `'month' and 'year' parameters are required` });
     try {
       const totalAmount = await order.sum('amount', {
         where: {
@@ -83,9 +82,9 @@ router.get('/monthly', async (req, res) => {
       raw: true
     });
 
+
     // Filter out months with zero sales
     const nonZeroSales = sales.filter(sale => sale.total !== 0);
-
     res.json(nonZeroSales);
   } catch (error) {
     res.status(500).json( error.message );
@@ -196,9 +195,5 @@ router.get('/count', async (req, res) => {
     res.status(500).json( error.message );
   }
 });
-
-
-
-
       
-  module.exports = router;
+module.exports = router;

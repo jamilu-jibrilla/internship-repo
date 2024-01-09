@@ -64,7 +64,7 @@ const shipping_dock = sequelize.define('shipping_dock', {
     defaultValue: 'active'
   }
 }, {
-  tableName: 'shipping_docks' // Moved to options object
+  tableName: 'shipping_docks' 
 });
 
 const transaction = sequelize.define('transaction', {
@@ -95,7 +95,7 @@ const transaction = sequelize.define('transaction', {
     allowNull: false
   }
 }, {
-  tableName: 'transactions' // Moved to options object
+  tableName: 'transactions' 
 });
 
 const order = sequelize.define('order', {
@@ -109,11 +109,11 @@ const order = sequelize.define('order', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  amount: { // Added this field
+  amount: { 
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  tax: { // Added this field
+  tax: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -127,10 +127,10 @@ const order = sequelize.define('order', {
     defaultValue: 'not paid'
   }
 }, {
-  tableName: 'orders' // Moved to options object
+  tableName: 'orders'
 });
 
-sequelize.sync();
+sequelize.sync({force: true});
 
 fs.readdirSync(__dirname)
   .filter((file) => {

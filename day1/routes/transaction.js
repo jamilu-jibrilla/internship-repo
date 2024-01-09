@@ -4,14 +4,11 @@ const Sequelize = require('sequelize');
 let transaction = require('../models/index');
 transaction = transaction.transaction
 
-// Get all shipping docks
 router.get('/', async (req, res) => {
-    console.log(transaction)
   const transact = await transaction.findAll();
   res.json(transact);
 });
 
-// Get one shipping dock by id
 router.get('/:id', async (req, res) => {
     const transact = await transaction.findByPk(req.params.id);
     if (transact) {
@@ -21,28 +18,19 @@ router.get('/:id', async (req, res) => {
     }
   });
   
-  // Add a new shipping dock
   router.post('/', async (req, res) => {
-    
-    // Check if request body is empty
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "Request body cannot be empty" });
     }
-  
     try {
-      const newShippingDock = await transaction.create(req.body);
-      res.status(201).json(newShippingDock);
+      const transact = await transaction.create(req.body);
+      res.status(201).json(transact);
     } catch (error) {
-      // Handle Sequelize validation error
         return res.status(400).json({ error: "Validation Error: " + error.message });
-      
-      // Handle other errors
-      return res.status(500).json({ error: "An error occurred while creating the shipping dock." });
     }
   });
   
   
-  // Update a shipping dock
   router.put('/:id', async (req, res) => {
     const transact = await transaction.findByPk(req.params.id);
     if (transact) {
@@ -53,12 +41,11 @@ router.get('/:id', async (req, res) => {
     }
   });
   
-  // Delete a shipping dock
   router.delete('/:id', async (req, res) => {
     const transact = await transaction.findByPk(req.params.id);
     if (transact) {
       await transact.destroy();
-      res.status(204).send();
+      res.status(204).send("Deleted");
     } else {
       res.status(404).send('transaction  not found');
     }

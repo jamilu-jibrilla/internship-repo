@@ -4,12 +4,9 @@ const Sequelize = require('sequelize');
 let order = require('../models/index');
 order = order.order
 const { Op, literal } = require('sequelize');
-const models = require('../models/index'); // assuming you have a models.js file
+const models = require('../models/index'); 
 const orderService = require('../services/orderService');
 const orderCursorService = require('../services/orderCursorService');
-
-
-
 
 router.get('/cursor', async (req, res) => {
   const { id = 1, limit = 10, sort, direction } = req.query;
@@ -70,8 +67,6 @@ router.get('/:id', async (req, res) => {
 
   // Add new order
   router.post('/', async (req, res) => {
-
-    // Check if request body is empty
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "Request body cannot be empty" });
     }
@@ -101,7 +96,7 @@ router.get('/:id', async (req, res) => {
     const ord = await order.findByPk(req.params.id);
     if (ord) {
       await ord.destroy();
-      res.status(204).send();
+      res.status(204).send("deleted");
     } else {
       res.status(404).send('order not found');
     }

@@ -3,9 +3,8 @@ var router = express.Router();
 const Sequelize = require('sequelize');
 let ShippingDock = require('../models/index');
 ShippingDock = ShippingDock.shipping_dock
+
 // Get all shipping docks
-
-
 router.get('/', async (req, res) => {
     console.log(ShippingDock)
   const shippingDocks = await ShippingDock.findAll();
@@ -24,9 +23,6 @@ router.get('/:id', async (req, res) => {
   
   // Add a new shipping dock
   router.post('/', async (req, res) => {
-    console.log(req.body, 'body')
-    
-    // Check if request body is empty
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "Request body cannot be empty" });
     }
@@ -35,11 +31,7 @@ router.get('/:id', async (req, res) => {
       const newShippingDock = await ShippingDock.create(req.body);
       res.status(201).json(newShippingDock);
     } catch (error) {
-      // Handle Sequelize validation error
         return res.status(400).json({ error: "Validation Error: " + error.message });
-      
-      // Handle other errors
-      return res.status(500).json({ error: "An error occurred while creating the shipping dock." });
     }
   });
   

@@ -3,9 +3,7 @@ const Sequelize = require('sequelize');
 var router = express.Router();
 const DataTypes = Sequelize.DataTypes;
 const sequelize = require('../models/index').sequelize
-let rules = require('../models/rules')(sequelize, DataTypes);;
-
-
+let rules = require('../models/rules')(sequelize, DataTypes);
 
 
   router.get('/', async (req, res) => {

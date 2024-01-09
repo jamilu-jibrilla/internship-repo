@@ -99,7 +99,7 @@ const transaction = sequelize.define('transaction', {
     allowNull: false
   },
 }, {
-  tableName: 'transactions' // Moved to options object
+  tableName: 'transactions' 
 });
 
 const order = sequelize.define('order', {
@@ -113,11 +113,11 @@ const order = sequelize.define('order', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  amount: { // Added this field
+  amount: { 
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  tax: { // Added this field
+  tax: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -130,15 +130,15 @@ const order = sequelize.define('order', {
     values: ['paid', 'not paid'],
     defaultValue: 'not paid'
   },
-  date: { // Added this field
+  date: { 
     type: DataTypes.DATE,
     allowNull: false
   },
 }, {
-  tableName: 'orders' // Moved to options object
+  tableName: 'orders' 
 });
 
-sequelize.sync();
+sequelize.sync({force: true});
 
 fs.readdirSync(__dirname)
   .filter((file) => {
